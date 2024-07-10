@@ -1,0 +1,52 @@
+{
+  "name": "vue3-draggable-grid",
+  "version": "0.0.6",
+  "keywords": [
+    "vue3",
+    "typescript",
+    "grid",
+    "layout",
+    "draggable",
+    "resizable"
+  ],
+  "description": "基于vue3+grid布局实现的拖拽布局",
+  "author": {
+    "name": "wzw",
+    "url": "https://wzwdream.github.io/my-blog/"
+  },
+  "homepage": "https://github.com/wzwdream/vue3-draggable-grid/",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/vue3-draggable-grid.cjs",
+  "module": "dist/vue3-draggable-grid.umd.cjs",
+  "style": "dist/style.css",
+  "license": "MIT",
+  "scripts": {
+    "build": "vite build && vue-tsc",
+    "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "docs:dev": "vitepress dev packages",
+    "docs:build": "vitepress build packages",
+    "docs:preview": "vitepress preview packages"
+  },
+  "dependencies": {
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@ruabick/md-demo-plugins": "^0.3.3",
+    "@ruabick/vitepress-demo-block": "^0.3.3",
+    "@types/lodash": "^4.17.6",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^9.5.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "vitepress": "1.2.3",
+    "vue-tsc": "^2.0.21",
+    "vue3-draggable-grid": "^0.0.6"
+  }
+}
