@@ -13,9 +13,9 @@ import { DraggableStart, DraggableHandle, DraggableEnd, Removes, HandleType, Lay
 import { key } from './help/key'
 import useDrage from './help/useDrage'
 import useLayout from './help/useLayout'
-import { calcColWidth, calcHeight, deepClone, drawGridLines } from './help/utils'
+import { calcColWidth, calcHeight, drawGridLines } from './help/utils'
 import { onMounted, ref, watchEffect, provide, watch, computed } from 'vue'
-import { checkLayout } from './help/dragerule'
+
 
 const props = withDefaults(defineProps<PropsData>(), {
     data: () => [] as Layout,
@@ -70,12 +70,16 @@ const calcLayoutHeight = () => {
 
 // 监听变化动态计算高度和绘制网格线
 watch([col, rowH, gutter, layoutdata], () => {
+   
+   drawOwnGrid();
+})
+
+const drawOwnGrid=()=>{
     calcWidth()
     if(!isDraging.value) calcLayoutHeight() // 拖拽中不使用layoutdata计算高度
-    console.log(Date()+"开始绘制网格线");
+   
     drawGrid()
-    console.log(Date()+"网格线绘制完成");
-})
+}
 onMounted(() => {
     calcWidth()
     calcLayoutHeight()
@@ -90,22 +94,24 @@ onMounted(() => {
  * 保证hook中的数据是最新数据
  */
 watchEffect(() => {
-    console.log(Date()+"开始更新样式")
+    
     // 拖拽中的数据不实时更新到外部，等拖拽结束在更新 ps: 会导致bug
     if (!isDraging.value) {
-        console.log(Date()+"开始进行深度克隆");
-        layoutdata.value = deepClone(checkLayout(props.data, Number(props.col)))
+       
+        layoutdata.value = props.data;
+        drawOwnGrid();
         // 判断数据经过初始化后是否发生变化，如果发生变化能返回给父组件
         if (JSON.stringify(layoutdata.value) !== JSON.stringify(props.data)) {
             updateData()
         }
     }
+   
     rowH.value = Number(props.rowH)
     col.value = Number(props.col)
     gutter.value = Number(props.gutter)
     isCollision.value = props.isCollision
     updateStyle(col.value, rowH.value, gutter.value)
-    console.log(Date()+"样式更新完成")
+   
 })
 /**
  * 抛出emit事件

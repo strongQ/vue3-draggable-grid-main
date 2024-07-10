@@ -154,7 +154,7 @@ export const collisionAvoidanceForItems = (layout: Layout, item: LayoutItem, col
  * @returns 合理的布局数据
  */
 export const checkLayout = (data: Layout, col: number) => {
-    let temp = deepClone(data)
+    let temp = data;
     for (let i = 0; i < temp.length; i++) {
         const item = temp[i]
         if (!item.static) {
